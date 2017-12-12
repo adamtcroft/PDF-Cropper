@@ -31,6 +31,9 @@ namespace PDFCropperService
             string oldFile = "label.pdf";
             DateTime today = DateTime.Today;
             string date = today.ToString("MMddyyyy");
+
+            FileSystemWatcher watcher = new FileSystemWatcher(directory, filter: "label.pdf");
+
             cropPage(directory, oldFile, date);
         }
 
