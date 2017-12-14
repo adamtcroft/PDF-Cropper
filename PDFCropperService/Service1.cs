@@ -31,14 +31,17 @@ namespace PDFCropperService
             string oldFile = "label.pdf";
             DateTime today = DateTime.Today;
             string date = today.ToString("MMddyyyy");
-            cropPage(directory, oldFile, date);
+            string year = today.ToString("yyyy");
+            cropPage(directory, oldFile, date, year);
         }
 
-        private void cropPage(string directory, string oldFile, string date)
+        private void cropPage(string directory, string oldFile, string date, string year)
         {
             string file = directory + "label.pdf";
             oldFile = file;
-            string newFile = directory + "eBay-USPS-" + date + ".pdf";
+            string eBayName = "eBay-USPS-" + date + ".pdf";
+            string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\"+ year + " Taxes\\";
+            string newFile = directory + eBayName; 
             PdfReader reader = new PdfReader(file);
 
             iTextSharp.text.Rectangle size = new iTextSharp.text.Rectangle(0, 0, 612, 422);
@@ -57,6 +60,7 @@ namespace PDFCropperService
             PdfImportedPage page = writer.GetImportedPage(reader, 1);
             cb.AddTemplate(page, 0, 0);
             doc.Close();
+            File.Move(newFile, gDriveDirectory + eBayName);
         }
 
         protected override void OnStop()
