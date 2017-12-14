@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFCropperService", "PDFCropperService.csproj", "{66A2D6E9-2AD9-401F-A71C-382AC0E94B61}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallPDFCropper", "..\InstallPDFCropper\InstallPDFCropper.vdproj", "{9B8B9036-5E7A-4E2C-86CF-3B35B9FC5655}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{66A2D6E9-2AD9-401F-A71C-382AC0E94B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66A2D6E9-2AD9-401F-A71C-382AC0E94B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66A2D6E9-2AD9-401F-A71C-382AC0E94B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B8B9036-5E7A-4E2C-86CF-3B35B9FC5655}.Debug|Any CPU.ActiveCfg = Debug
+		{9B8B9036-5E7A-4E2C-86CF-3B35B9FC5655}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

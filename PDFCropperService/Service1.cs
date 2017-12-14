@@ -15,6 +15,7 @@ namespace PDFCropperService
 {
     public partial class Service1 : ServiceBase
     {
+
         public Service1()
         {
             InitializeComponent();
@@ -27,28 +28,52 @@ namespace PDFCropperService
 
         protected override void OnStart(string[] args)
         {
+            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher.Path = "C:\\Users\\adamt\\Downloads";
+            watcher.Filter = "label.pdf";
+            watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName | NotifyFilters.LastAccess;
+            watcher.Changed += new FileSystemEventHandler(Watcher_Changed); 
+            watcher.Created += new FileSystemEventHandler(Watcher_Changed);
+            watcher.EnableRaisingEvents = true;
+        }
+
+        //public void go()
+        //{
+        //    string directory = "C:\\Users\\adamt\\Downloads\\";
+        //    string oldFile = "label.pdf";
+        //    DateTime today = DateTime.Today;
+        //    string date = today.ToString("MMddyyyy");
+        //    string year = today.ToString("yyyy");
+        //    string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\"+ year + " Taxes\\";
+        //    string eBayName = "eBay-USPS-" + date + ".pdf";
+        //    string newFile = directory + eBayName; 
+
+        //    cropPage(directory, oldFile, date, year, gDriveDirectory, newFile, eBayName);
+        //    directoryCheck(gDriveDirectory);
+        //    fileCheck(gDriveDirectory, newFile, eBayName);
+        //}
+
+        private void Watcher_Changed(object sender, FileSystemEventArgs e)
+        {
             string directory = "C:\\Users\\adamt\\Downloads\\";
             string oldFile = "label.pdf";
             DateTime today = DateTime.Today;
             string date = today.ToString("MMddyyyy");
-<<<<<<< HEAD
             string year = today.ToString("yyyy");
-            cropPage(directory, oldFile, date, year);
-=======
+            string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\"+ year + " Taxes\\";
+            string eBayName = "eBay-USPS-" + date + ".pdf";
+            string newFile = directory + eBayName; 
 
-            FileSystemWatcher watcher = new FileSystemWatcher(directory, filter: "label.pdf");
-
-            cropPage(directory, oldFile, date);
->>>>>>> caa6e58bd4d0032ec50bf4280e427f1edf32ee7f
+            cropPage(directory, oldFile, date, year, gDriveDirectory, newFile, eBayName);
+            directoryCheck(gDriveDirectory);
+            fileCheck(gDriveDirectory, newFile, eBayName);
         }
 
-        private void cropPage(string directory, string oldFile, string date, string year)
+        private void cropPage(string directory, string oldFile, string date,
+                            string year, string gDriveDirectory, string newFile, string eBayName)
         {
-            string file = directory + "label.pdf";
+            string file = directory + oldFile;
             oldFile = file;
-            string eBayName = "eBay-USPS-" + date + ".pdf";
-            string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\"+ year + " Taxes\\";
-            string newFile = directory + eBayName; 
             PdfReader reader = new PdfReader(file);
 
             iTextSharp.text.Rectangle size = new iTextSharp.text.Rectangle(0, 0, 612, 422);
@@ -67,7 +92,38 @@ namespace PDFCropperService
             PdfImportedPage page = writer.GetImportedPage(reader, 1);
             cb.AddTemplate(page, 0, 0);
             doc.Close();
-            File.Move(newFile, gDriveDirectory + eBayName);
+
+        }
+
+        public void directoryCheck(string gDriveDirectory)
+        {
+            if (!Directory.Exists(gDriveDirectory))
+            {
+                Directory.CreateDirectory(gDriveDirectory);
+            }
+        }
+
+        public void fileCheck(string gDriveDirectory, string newFile, string eBayName)
+        {
+            if (File.Exists(gDriveDirectory + eBayName))
+            {
+                int filecount = 1;
+
+                foreach(string filename in Directory.GetFiles(gDriveDirectory))
+                {
+                    if (filename.Contains(eBayName.Substring(0, 18)))
+                    {
+                        filecount++;
+                        Console.WriteLine(filecount);
+                        Console.WriteLine(eBayName.Substring(0, 18));
+                    }
+                }
+                File.Move(newFile, gDriveDirectory + eBayName.Substring(0, 18) + "-pg" + filecount + ".pdf");
+            }
+            else
+            {
+                File.Move(newFile, gDriveDirectory + eBayName);
+            }
         }
 
         protected override void OnStop()
