@@ -31,8 +31,14 @@ namespace PDFCropperService
             string oldFile = "label.pdf";
             DateTime today = DateTime.Today;
             string date = today.ToString("MMddyyyy");
+<<<<<<< HEAD
             string year = today.ToString("yyyy");
             cropPage(directory, oldFile, date, year);
+=======
+
+
+            cropPage(directory, oldFile, date);
+>>>>>>> caa6e58bd4d0032ec50bf4280e427f1edf32ee7f
         }
 
         private void cropPage(string directory, string oldFile, string date, string year)
