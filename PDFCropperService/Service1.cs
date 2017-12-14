@@ -36,6 +36,7 @@ namespace PDFCropperService
             cropPage(directory, oldFile, date, year);
 =======
 
+            FileSystemWatcher watcher = new FileSystemWatcher(directory, filter: "label.pdf");
 
             cropPage(directory, oldFile, date);
 >>>>>>> caa6e58bd4d0032ec50bf4280e427f1edf32ee7f
