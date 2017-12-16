@@ -12,12 +12,12 @@ namespace PDFCropperCLI
     {
         static void Main(string[] args)
         {
-            string directory = "C:\\Users\\adamt\\Downloads\\";
+            string directory = "C:\\Users\\" + Environment.UserName + "\\Downloads\\";
             string oldFile = "label.pdf";
             DateTime today = DateTime.Today;
             string date = today.ToString("MMddyyyy");
             string year = today.ToString("yyyy");
-            string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\" + year + " Taxes\\";
+            string gDriveDirectory = "C:\\Users\\" + Environment.UserName + "\\Google Drive\\" + year + " Taxes\\";
             string eBayName = "eBay-USPS-" + date + ".pdf";
             string newFile = directory + eBayName;
 
