@@ -77,8 +77,6 @@ namespace PDFCropperCLI
                         if (filename.Contains(eBayName.Substring(0, 18)))
                         {
                             filecount++;
-                            Console.WriteLine(filecount);
-                            Console.WriteLine(eBayName.Substring(0, 18));
                         }
                     }
                     File.Move(newFile, gDriveDirectory + eBayName.Substring(0, 18) + "-pg" + filecount + ".pdf");
