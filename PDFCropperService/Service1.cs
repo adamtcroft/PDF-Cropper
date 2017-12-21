@@ -15,6 +15,8 @@ namespace PDFCropperService
 {
     public partial class Service1 : ServiceBase
     {
+        static int running = 0;
+        static int runCount = 0;
 
         public Service1()
         {
@@ -46,36 +48,8 @@ namespace PDFCropperService
             watcher.EnableRaisingEvents = true;
         }
 
-        //public void go()
-        //{
-        //    string directory = "C:\\Users\\adamt\\Downloads\\";
-        //    string oldFile = "label.pdf";
-        //    DateTime today = DateTime.Today;
-        //    string date = today.ToString("MMddyyyy");
-        //    string year = today.ToString("yyyy");
-        //    string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\"+ year + " Taxes\\";
-        //    string eBayName = "eBay-USPS-" + date + ".pdf";
-        //    string newFile = directory + eBayName; 
-
-        //    cropPage(directory, oldFile, date, year, gDriveDirectory, newFile, eBayName);
-        //    directoryCheck(gDriveDirectory);
-        //    fileCheck(gDriveDirectory, newFile, eBayName);
-        //}
-
         private void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            string directory = "C:\\Users\\adamt\\Downloads\\";
-            string oldFile = "label.pdf";
-            DateTime today = DateTime.Today;
-            string date = today.ToString("MMddyyyy");
-            string year = today.ToString("yyyy");
-            string gDriveDirectory = "C:\\Users\\adamt\\Google Drive\\"+ year + " Taxes\\";
-            string eBayName = "eBay-USPS-" + date + ".pdf";
-            string newFile = directory + eBayName; 
-
-            cropPage(directory, oldFile, date, year, gDriveDirectory, newFile, eBayName);
-            directoryCheck(gDriveDirectory);
-            fileCheck(gDriveDirectory, newFile, eBayName);
             if (runCount == 0)
             {
                 string directory = "C:\\Users\\adamt\\Downloads\\";
@@ -122,7 +96,6 @@ namespace PDFCropperService
             PdfImportedPage page = writer.GetImportedPage(reader, 1);
             cb.AddTemplate(page, 0, 0);
             doc.Close();
-
         }
 
         public void directoryCheck(string gDriveDirectory)
