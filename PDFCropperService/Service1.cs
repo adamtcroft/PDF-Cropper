@@ -28,10 +28,12 @@ namespace PDFCropperService
 
         protected override void OnStart(string[] args)
         {
-            FileSystemWatcher watcher = new FileSystemWatcher();
-            watcher.Path = "C:\\Users\\adamt\\Downloads";
-            watcher.Filter = "label.pdf";
-            watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName | NotifyFilters.LastAccess;
+            FileSystemWatcher watcher = new FileSystemWatcher
+            {
+                Path = "C:\\Users\\adamt\\Downloads",
+                Filter = "label.pdf",
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName | NotifyFilters.LastAccess
+            };
             watcher.Changed += new FileSystemEventHandler(Watcher_Changed); 
             watcher.Created += new FileSystemEventHandler(Watcher_Changed);
             watcher.EnableRaisingEvents = true;
