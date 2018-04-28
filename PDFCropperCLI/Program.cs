@@ -17,7 +17,7 @@ namespace PDFCropperCLI
             DateTime today = DateTime.Today;
             string date = today.ToString("MMddyyyy");
             string year = today.ToString("yyyy");
-            string gDriveDirectory = "C:\\Users\\" + Environment.UserName + "\\Google Drive\\" + year + " Taxes\\";
+            string gDriveDirectory = "Z:\\Taxes\\" + year + " Taxes\\";
             string eBayName = "eBay-USPS-" + date + ".pdf";
             string newFile = directory + eBayName;
 
